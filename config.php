@@ -38,7 +38,7 @@ $CONFIG = array (
   'dbhost' => 'postgressql',
   'dbport' => '',
   'dbtableprefix' => 'oc_',
-  'dbuser' => 'oc_alexander',
+  'dbuser' => 'oc_XXX',
   'dbpassword' => 'XXX',
   'installed' => true,
 );
