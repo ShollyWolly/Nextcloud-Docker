@@ -1,0 +1,35 @@
+version: "3"
+
+services:
+
+  postgressql:
+    build: ./postgressql
+    container_name: postgressql
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: XXX
+      POSTGRES_DB: nextcloud
+    volumes:
+      - ./postgressql:/docker-entrypoint-initdb.d/
+      - ./postgressql/data:/var/lib/postgresql/data
+
+  nextcloud:
+    container_name: nextcloud
+    image: nextcloud:latest
+    restart: always
+    ports:
+      - 800:80
+    volumes:
+      - ./nextcloud/html:/var/www/html
+    environment:
+      - POSTGRES_DB=nextcloud
+      - POSTGRES_HOST=postgressql
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=XXX
+    depends_on:
+      - postgressql
+
+
